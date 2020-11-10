@@ -2,6 +2,14 @@
 
 EMV QR Code library build with Kotlin 
 
+## Features
+
+- [x] Merchant Presented Mode decode
+- [x] Validate CRC
+- [ ] Merchant Presented Mode encode
+- [ ] Consumer Presented Mode encode
+- [ ] Consumer Presented Mode decode
+
 ### Merchant Presented Mode Deocde
 
 ```kotlin
@@ -22,3 +30,7 @@ merchantPresentedMode.merchantCity = "Banteay Meanchey"
 merchantPresentedMode.additionalDataFieldTemplate = "010812345678"
 merchantPresentedMode.crc = "1FF2"
 ```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
