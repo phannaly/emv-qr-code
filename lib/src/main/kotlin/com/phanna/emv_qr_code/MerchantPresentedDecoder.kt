@@ -7,6 +7,8 @@ class MerchantPresentedDecoder {
     companion object {
         @JvmStatic
         fun decode(encoded: String): MerchantPresentedMode {
+            CRC.verify(encoded)
+
             val data = MerchantPresentedDecoder().decode(encoded)
             return MerchantPresentedMode(data)
         }
