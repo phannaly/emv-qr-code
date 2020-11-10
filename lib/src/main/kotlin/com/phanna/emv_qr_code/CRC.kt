@@ -1,11 +1,11 @@
 package com.phanna.emv_qr_code
 
 object CRC {
-    fun calculate(bytes: ByteArray): String {
+    fun calculate(bytes: String): String {
         var crc = 0xFFFF // initial value
         val polynomial = 0x1021 // 0001 0000 0010 0001  (0, 5, 12)
 
-        for (b in bytes) {
+        for (b in bytes.toByteArray()) {
             for (i in 0..7) {
                 val bit = b.toInt() shr 7 - i and 1 == 1
                 val c15 = crc shr 15 and 1 == 1
@@ -18,12 +18,11 @@ object CRC {
         return Integer.toHexString(crc).toString().toUpperCase()
     }
 
-    fun verify(data: String) {
-        val dataWithoutCRC = data.dropLast(4)
-        val crc = calculate(dataWithoutCRC.toByteArray())
+    fun verify(payload: String, crc: String): Boolean {
+        val calculatedCRC = calculate(payload.dropLast(4))
 
-        if (crc == data.takeLast(4)) {
-            return
+        if (crc == calculatedCRC) {
+            return true
         }
 
         throw InvalidCRC("CRC is invalid")
