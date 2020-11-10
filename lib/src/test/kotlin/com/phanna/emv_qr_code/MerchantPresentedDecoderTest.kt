@@ -9,6 +9,7 @@ class MerchantPresentedDecoderTest {
             "00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.005303840621201081234567863041FF2"
         )
 
+        assertEquals(merchantPresentedMode.isDynamic(), true)
         assertEquals(merchantPresentedMode.payloadFormatIndicator, "01")
         assertEquals(merchantPresentedMode.pointOfInitiationMethod, "12")
         assertEquals(merchantPresentedMode.merchantAccountInformation, "37210116372101160123456789ABCDE")

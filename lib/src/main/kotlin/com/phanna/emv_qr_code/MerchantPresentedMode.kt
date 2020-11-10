@@ -12,4 +12,12 @@ class MerchantPresentedMode(private val map: MutableMap<String, String>) {
     var merchantCity: String by map
     var additionalDataFieldTemplate: String by map
     var crc: String by map
+
+    fun isStatic(): Boolean {
+        return pointOfInitiationMethod == "11"
+    }
+
+    fun isDynamic(): Boolean {
+        return !isStatic()
+    }
 }
