@@ -1,5 +1,7 @@
 package com.phanna.emv_qr_code
 
+import java.util.*
+
 class MerchantPresentedMode(private val map: MutableMap<String, String>) {
     var payloadFormatIndicator: String by map
     var pointOfInitiationMethod: String by map
@@ -13,11 +15,7 @@ class MerchantPresentedMode(private val map: MutableMap<String, String>) {
     var additionalDataFieldTemplate: String by map
     var crc: String by map
 
-    fun isStatic(): Boolean {
-        return pointOfInitiationMethod == "11"
-    }
-
-    fun isDynamic(): Boolean {
-        return !isStatic()
-    }
+    val isStatic = pointOfInitiationMethod == "11"
+    val isDynamic = !isStatic
+    val currency = Currency.getAvailableCurrencies().first { it.numericCode == transactionCurrency.toInt() }.toString()
 }
