@@ -1,7 +1,7 @@
 package com.phanna.emv_qr_code
 
 class MerchantPresentedEncoder {
-    var data = DataObjectTypes.data()
+    private val data = DataObjectTypes.data()
     private val map = mutableMapOf<String, String>()
     var payloadFormatIndicator: String = ""
     var pointOfInitiationMethod: String = ""
