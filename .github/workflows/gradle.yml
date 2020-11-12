@@ -22,5 +22,7 @@ jobs:
         java-version: 1.8
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-    - name: Build and Publish
-      run: ./gradlew -PSONATYPE_USER=${{ secrets.SONATYPE_USER }} -PSONATYPE_PASSWORD=${{ secrets.SONATYPE_PASSWORD }}  -PPGP_SIGNED_KEY="${{ secrets.PGP_SIGNED_KEY }}" -PPGP_SIGNED_PASSWORD="${{ secrets.PGP_SIGNED_PASSWORD }}" build publish
+    - name: Build
+      run: ./gradlew build
+    - name: Publish
+      run: gradle -PSONATYPE_USER=${{ secrets.SONATYPE_USER }} -PSONATYPE_PASSWORD=${{ secrets.SONATYPE_PASSWORD }}  -PPGP_SIGNED_KEY="${{ secrets.PGP_SIGNED_KEY }}" -PPGP_SIGNED_PASSWORD="${{ secrets.PGP_SIGNED_PASSWORD }}" publish
