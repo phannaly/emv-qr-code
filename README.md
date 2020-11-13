@@ -1,6 +1,27 @@
 # EMV QR Code
+[![Actions Status](https://github.com/phannaly/emv-qr-code/workflows/Build%20and%20test/badge.svg)](https://github.com/phannaly/emv-qr-code/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 
 EMV QR Code library build with Kotlin 
+
+## Usage
+
+You can install this package from the central Maven repositories:
+
+Maven
+```xml
+<dependency>
+    <groupId>com.github.phannaly</groupId>
+    <artifactId>emv-qr-code</artifactId>
+    <version>0.0.1</version>
+</dependency>
+```
+
+Gradle
+```kotlin
+implementation 'com.github.phannaly:emv-qr-code:0.0.1'
+```
 
 ## Features
 
