@@ -33,9 +33,6 @@ dependencies {
     "api"("org.apache.commons:commons-math3:3.6.1")
 }
 
-group = "com.github.phannaly"
-version = "0.0.1"
-
 tasks.register<Jar>("sourcesJar") {
     archiveClassifier.set("sources")
     from(sourceSets.main.get().allJava)
@@ -60,6 +57,10 @@ publishing {
     }
     publications {
         create<MavenPublication>("mavenJava") {
+            groupId = "com.github.phannaly"
+            artifactId = "emv-qr-code"
+            version = "0.0.2"
+
             from(components["java"])
             artifact(tasks["sourcesJar"])
             artifact(tasks["javadocJar"])
