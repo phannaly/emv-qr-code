@@ -8,6 +8,7 @@ class DataObjectTypes {
             dataObjects["payloadFormatIndicator"] = "00"
             dataObjects["pointOfInitiationMethod"] = "01"
             dataObjects["merchantCategoryCode"] = "52"
+            dataObjects["merchantAccountInformation"] = "15"
             dataObjects["transactionCurrency"] = "53"
             dataObjects["transactionAmount"] = "54"
             dataObjects["countryCode"] = "58"

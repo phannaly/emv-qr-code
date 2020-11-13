@@ -1,9 +1,11 @@
 # Ignore Gradle project-specific cache directory
 .gradle
+gradle.properties
 
 # Ignore Gradle build output directory
 build/
 .idea/
+.idea*
 .sts4-cache/
 *.iml
 .DS_Store

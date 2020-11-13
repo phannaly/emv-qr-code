@@ -24,5 +24,3 @@ jobs:
       run: chmod +x gradlew
     - name: Build
       run: ./gradlew build
-    - name: Publish
-      run: gradle -PSONATYPE_USER=${{ secrets.SONATYPE_USER }} -PSONATYPE_PASSWORD=${{ secrets.SONATYPE_PASSWORD }}  -PPGP_SIGNED_KEY="${{ secrets.PGP_SIGNED_KEY }}" -PPGP_SIGNED_PASSWORD="${{ secrets.PGP_SIGNED_PASSWORD }}" publish

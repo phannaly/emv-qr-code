@@ -1,14 +1,10 @@
-val SONATYPE_USER: String? by project
-val SONATYPE_PASSWORD: String? by project
+val sonatypeUser: String? by project
+val sonatypePassword: String? by project
 
 plugins {
-    // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.3.72"
-
-    // Apply the java-library plugin for API and implementation separation.
     `java-library`
     `maven-publish`
-
     signing
 }
 
@@ -57,8 +53,8 @@ publishing {
             val releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
             url = uri(releasesRepoUrl)
             credentials {
-                username = SONATYPE_USER
-                password = SONATYPE_PASSWORD
+                username = sonatypeUser
+                password = sonatypePassword
             }
         }
     }
@@ -95,9 +91,5 @@ publishing {
 }
 
 signing {
-    val PGP_SIGNED_KEY: String? by project
-    val PGP_SIGNED_PASSWORD: String? by project
-
-    useInMemoryPgpKeys(PGP_SIGNED_KEY, PGP_SIGNED_PASSWORD)
     sign(publishing.publications["mavenJava"])
 }
