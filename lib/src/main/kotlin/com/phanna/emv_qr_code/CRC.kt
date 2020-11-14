@@ -21,10 +21,10 @@ object CRC {
         return Integer.toHexString(crc).toString().toUpperCase()
     }
 
-    fun verify(payload: String, crc: String): Boolean {
+    fun verify(payload: String): Boolean {
         val calculatedCRC = calculate(payload.dropLast(4))
 
-        if (crc == calculatedCRC) {
+        if (calculatedCRC == payload.takeLast(4)) {
             return true
         }
 

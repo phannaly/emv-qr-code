@@ -6,10 +6,12 @@ class MerchantPresentedDecoder {
 
     companion object {
         @JvmStatic
-        fun decode(encoded: String): MerchantPresentedMode {
-            CRC.verify(encoded, encoded.takeLast(4))
+        fun decode(payload: String, verifyCRC: Boolean = true): MerchantPresentedMode {
+            if (verifyCRC) {
+                CRC.verify(payload)
+            }
 
-            val data = MerchantPresentedDecoder().decode(encoded)
+            val data = MerchantPresentedDecoder().decode(payload)
             return MerchantPresentedMode(data)
         }
     }

@@ -34,7 +34,6 @@ implementation 'com.github.phannaly:emv-qr-code:0.0.2'
 - [ ] Consumer Presented Mode decode
 
 ### Merchant Presented Mode decode
-
 ```kotlin
  val merchantPresentedMode = MerchantPresentedDecoder.decode(
      "00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.005303840621201081234567863041FF2"
@@ -73,6 +72,26 @@ merchantPresentedMode.additionalDataFieldTemplate = "010812345678"
 merchantPresentedMode.encode()
 //"00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.005303840621201081234567863041FF2"
 
+```
+
+### CRC
+CRC has been validated by default, but you can skip it by just set second params to false
+
+```kotlin
+val merchantPresentedMode = MerchantPresentedDecoder.decode(
+  "00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.005303840621201081234567863041FF2",
+  false
+)
+```
+Compute CRC
+```kotlin
+ CRC.calculate("00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.00530384062120108123456786304")
+// 1FF2
+```
+Validate CRC
+```kotlin
+CRC.verify("00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.005303840621201081234567863041FF2")
+// true
 ```
 
 ## License
