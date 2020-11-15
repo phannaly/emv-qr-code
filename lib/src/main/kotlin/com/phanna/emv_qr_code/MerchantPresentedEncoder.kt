@@ -3,9 +3,10 @@ package com.phanna.emv_qr_code
 class MerchantPresentedEncoder {
     private val data = DataObjectTypes.data()
     private val map = mutableMapOf<String, String>()
+    private lateinit var payload: String
+    lateinit var merchantAccountInformation: MerchantAccountInformation
     var payloadFormatIndicator: String = ""
     var pointOfInitiationMethod: String = ""
-    var merchantAccountInformation: String = ""
     var merchantCategoryCode: String = ""
     var transactionCurrency: String = ""
     var transactionAmount: String = ""
@@ -15,7 +16,7 @@ class MerchantPresentedEncoder {
     var merchantCity: String = ""
 
     fun encode(): String {
-        var payload = ""
+        payload = ""
 
         if (payloadFormatIndicator.isNotBlank()) {
             map[data["payloadFormatIndicator"].toString()] = payloadFormatIndicator
@@ -26,8 +27,10 @@ class MerchantPresentedEncoder {
         if (merchantCategoryCode.isNotBlank()) {
             map[data["merchantCategoryCode"].toString()] = merchantCategoryCode
         }
-        if (merchantAccountInformation.isNotBlank()) {
-            map[data["merchantAccountInformation"].toString()] = merchantAccountInformation
+        if (this::merchantAccountInformation.isInitialized) {
+            map[merchantAccountInformation.tag] = merchantAccountInformation.value
+        } else {
+            throw ExceptionInInitializerError("merchantAccountInformation must be initialized")
         }
         if (merchantCity.isNotBlank()) {
             map[data["merchantCity"].toString()] = merchantCity
