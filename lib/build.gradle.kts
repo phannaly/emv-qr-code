@@ -59,7 +59,7 @@ publishing {
         create<MavenPublication>("mavenJava") {
             groupId = "com.github.phannaly"
             artifactId = "emv-qr-code"
-            version = "0.0.2"
+            version = "0.0.3"
 
             from(components["java"])
             artifact(tasks["sourcesJar"])
@@ -67,7 +67,7 @@ publishing {
 
             pom {
                 name.set("EMV QR Code")
-                description.set("EMV QR Code library build with Kotlin")
+                description.set("EMV QR Code library for encode and decode both Merchant Presented Mode and Consumer Presented Mode")
                 url.set("https://github.com/phannaly/emv-qr-code")
                 licenses {
                     license {

@@ -4,7 +4,8 @@ import org.junit.Assert.assertEquals
 import kotlin.test.Test
 
 class MerchantPresentedEncoderTest {
-    @Test fun `encode qrcode data`() {
+    @Test
+    fun encodeQRCodePayload() {
         val merchantPresentedMode = MerchantPresentedEncoder()
         val merchantAccountInformation = MerchantAccountInformation()
         merchantAccountInformation.value = "37210116372101160123456789ABCDE"

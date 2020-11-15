@@ -5,7 +5,7 @@
 
 
 
-EMV QR Code library build with Kotlin 
+EMV QR Code library for encode and decode both Merchant Presented Mode and Consumer Presented Mode
 
 ## Usage
 
@@ -16,13 +16,13 @@ Maven
 <dependency>
     <groupId>com.github.phannaly</groupId>
     <artifactId>emv-qr-code</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 </dependency>
 ```
 
 Gradle
 ```kotlin
-implementation 'com.github.phannaly:emv-qr-code:0.0.2'
+implementation 'com.github.phannaly:emv-qr-code:0.0.3'
 ```
 
 ## Features
@@ -39,28 +39,31 @@ implementation 'com.github.phannaly:emv-qr-code:0.0.2'
      "00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.005303840621201081234567863041FF2"
  )
 
-merchantPresentedMode.isDynamic() = true
-merchantPresentedMode.payloadFormatIndicator = "01"
-merchantPresentedMode.pointOfInitiationMethod = "12"
-merchantPresentedMode.merchantAccountInformation = "37210116372101160123456789ABCDE"
-merchantPresentedMode.merchantCategoryCode = "4131"
-merchantPresentedMode.transactionCurrency = "840"
-merchantPresentedMode.transactionAmount = "10.00"
-merchantPresentedMode.countryCode = "KH"
-merchantPresentedMode.merchantName = "Kuntheas Shop"
-merchantPresentedMode.merchantCity = "Banteay Meanchey"
-merchantPresentedMode.additionalDataFieldTemplate = "010812345678"
-merchantPresentedMode.crc = "1FF2"
+merchantPresentedMode.isDynamic // true
+merchantPresentedMode.payloadFormatIndicator // "01"
+merchantPresentedMode.pointOfInitiationMethod // "12"
+merchantPresentedMode.merchantAccountInformation // "37210116372101160123456789ABCDE"
+merchantPresentedMode.merchantCategoryCode // "4131"
+merchantPresentedMode.transactionCurrency // "840"
+merchantPresentedMode.transactionAmount // "10.00"
+merchantPresentedMode.countryCode // "KH"
+merchantPresentedMode.merchantName // "Kuntheas Shop"
+merchantPresentedMode.merchantCity // "Banteay Meanchey"
+merchantPresentedMode.additionalDataFieldTemplate // "010812345678"
+merchantPresentedMode.crc // "1FF2"
 ```
 
 ### Merchant Presented Mode encode
 
 ```kotlin
 val merchantPresentedMode = MerchantPresentedEncoder()
+val merchantAccountInformation = MerchantAccountInformation()
+merchantAccountInformation.value = "37210116372101160123456789ABCDE"
+merchantAccountInformation.tag = "15"
 
+merchantPresentedMode.merchantAccountInformation = merchantAccountInformation
 merchantPresentedMode.pointOfInitiationMethod = "12"
 merchantPresentedMode.payloadFormatIndicator = "01"
-merchantPresentedMode.merchantAccountInformation = "37210116372101160123456789ABCDE"
 merchantPresentedMode.merchantCategoryCode = "4131"
 merchantPresentedMode.transactionCurrency = "840"
 merchantPresentedMode.transactionAmount = "10.00"
@@ -72,6 +75,8 @@ merchantPresentedMode.additionalDataFieldTemplate = "010812345678"
 merchantPresentedMode.encode()
 //"00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.005303840621201081234567863041FF2"
 
+merchantAccountInformation.paymentNetwork()
+// UnionPay
 ```
 
 ### CRC
