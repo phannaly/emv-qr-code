@@ -11,6 +11,10 @@ class MerchantPresentedEncoderTest {
         merchantAccountInformation.value = "37210116372101160123456789ABCDE"
         merchantAccountInformation.tag = "15"
 
+        val additionalDataField = AdditionalDataField()
+        additionalDataField.billNumber = "12345678"
+        additionalDataField.mobileNumber = "012444444"
+
         merchantPresentedMode.merchantAccountInformation = merchantAccountInformation
         merchantPresentedMode.pointOfInitiationMethod = "12"
         merchantPresentedMode.payloadFormatIndicator = "01"
@@ -20,11 +24,11 @@ class MerchantPresentedEncoderTest {
         merchantPresentedMode.countryCode = "KH"
         merchantPresentedMode.merchantName = "Kuntheas Shop"
         merchantPresentedMode.merchantCity = "Banteay Meanchey"
-        merchantPresentedMode.additionalDataFieldTemplate = "010812345678"
+        merchantPresentedMode.additionalDataFieldTemplate = additionalDataField
 
         assertEquals("UnionPay", merchantAccountInformation.paymentNetwork())
         assertEquals(
-            "00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.005303840621201081234567863041FF2",
+            "00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.0053038406225010812345678020901244444463042ACB",
             merchantPresentedMode.encode()
         )
     }

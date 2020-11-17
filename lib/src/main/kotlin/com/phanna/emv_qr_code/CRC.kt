@@ -2,7 +2,7 @@ package com.phanna.emv_qr_code
 
 object CRC {
     const val ID = "63"
-    const val VALUE = "04"
+    const val VALUE_LENGTH = "04"
 
     fun calculate(bytes: String): String {
         var crc = 0xFFFF // initial value
@@ -21,7 +21,7 @@ object CRC {
         return Integer.toHexString(crc).toString().toUpperCase()
     }
 
-    fun verify(payload: String): Boolean {
+    fun validate(payload: String): Boolean {
         val calculatedCRC = calculate(payload.dropLast(4))
 
         if (calculatedCRC == payload.takeLast(4)) {
