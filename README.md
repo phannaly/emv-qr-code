@@ -16,13 +16,13 @@ Maven
 <dependency>
     <groupId>com.github.phannaly</groupId>
     <artifactId>emv-qr-code</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
 </dependency>
 ```
 
 Gradle
 ```kotlin
-implementation 'com.github.phannaly:emv-qr-code:0.0.3'
+implementation 'com.github.phannaly:emv-qr-code:0.0.4'
 ```
 
 ## Features
@@ -61,6 +61,11 @@ val merchantAccountInformation = MerchantAccountInformation()
 merchantAccountInformation.value = "37210116372101160123456789ABCDE"
 merchantAccountInformation.tag = "15"
 
+// add your custom additional data field template here
+val additionalDataField = AdditionalDataField()
+additionalDataField.billNumber = "12345678"
+additionalDataField.mobileNumber = "012444444"
+
 merchantPresentedMode.merchantAccountInformation = merchantAccountInformation
 merchantPresentedMode.pointOfInitiationMethod = "12"
 merchantPresentedMode.payloadFormatIndicator = "01"
@@ -70,10 +75,9 @@ merchantPresentedMode.transactionAmount = "10.00"
 merchantPresentedMode.countryCode = "KH"
 merchantPresentedMode.merchantName = "Kuntheas Shop"
 merchantPresentedMode.merchantCity = "Banteay Meanchey"
-merchantPresentedMode.additionalDataFieldTemplate = "010812345678"
 
 merchantPresentedMode.encode()
-//"00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.005303840621201081234567863041FF2"
+// 00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.0053038406225010812345678020901244444463042ACB
 
 merchantAccountInformation.paymentNetwork()
 // UnionPay
@@ -90,12 +94,12 @@ val merchantPresentedMode = MerchantPresentedDecoder.decode(
 ```
 Compute CRC
 ```kotlin
- CRC.calculate("00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.00530384062120108123456786304")
+CRC.calculate("00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.00530384062120108123456786304")
 // 1FF2
 ```
 Validate CRC
 ```kotlin
-CRC.verify("00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.005303840621201081234567863041FF2")
+CRC.validate("00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.005303840621201081234567863041FF2")
 // true
 ```
 

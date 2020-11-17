@@ -21,7 +21,7 @@ object CRC {
         return Integer.toHexString(crc).toString().toUpperCase()
     }
 
-    fun verify(payload: String): Boolean {
+    fun validate(payload: String): Boolean {
         val calculatedCRC = calculate(payload.dropLast(4))
 
         if (calculatedCRC == payload.takeLast(4)) {

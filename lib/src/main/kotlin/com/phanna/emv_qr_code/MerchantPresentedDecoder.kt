@@ -6,9 +6,9 @@ class MerchantPresentedDecoder {
 
     companion object {
         @JvmStatic
-        fun decode(payload: String, verifyCRC: Boolean = true): MerchantPresentedMode {
-            if (verifyCRC) {
-                CRC.verify(payload)
+        fun decode(payload: String, validate: Boolean = true): MerchantPresentedMode {
+            if (validate) {
+                CRC.validate(payload)
             }
 
             val data = MerchantPresentedDecoder().decode(payload)
