@@ -50,9 +50,9 @@ class MerchantPresentedDecoder {
 
     private fun readString(data: String): StringParser? {
         val temp = data.substring(2)
-        val lengthValue = temp.substring(0, 2)
+        val valueLength = temp.substring(0, 2)
 
-        lengthValue.toIntOrNull()?.let { length ->
+        valueLength.toIntOrNull()?.let { length ->
             return StringParser(
                 id = data.substring(0, 2),
                 value = temp.substring(2, 2 + length),
