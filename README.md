@@ -15,13 +15,13 @@ Maven
 <dependency>
     <groupId>com.github.phannaly</groupId>
     <artifactId>emv-qr-code</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
 </dependency>
 ```
 
 Gradle
 ```kotlin
-implementation 'com.github.phannaly:emv-qr-code:0.0.4'
+implementation 'com.github.phannaly:emv-qr-code:0.0.5'
 ```
 
 ## Features
@@ -44,6 +44,7 @@ merchantPresentedMode.pointOfInitiationMethod // "12"
 merchantPresentedMode.merchantAccountInformation // "37210116372101160123456789ABCDE"
 merchantPresentedMode.merchantCategoryCode // "4131"
 merchantPresentedMode.transactionCurrency // "840"
+merchantPresentedMode.currency // "USD"
 merchantPresentedMode.transactionAmount // "10.00"
 merchantPresentedMode.countryCode // "KH"
 merchantPresentedMode.merchantName // "Merchant Shop"
