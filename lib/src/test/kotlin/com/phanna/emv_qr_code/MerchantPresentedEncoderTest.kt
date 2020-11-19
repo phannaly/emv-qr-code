@@ -22,13 +22,13 @@ class MerchantPresentedEncoderTest {
         merchantPresentedMode.transactionCurrency = "840"
         merchantPresentedMode.transactionAmount = "10.00"
         merchantPresentedMode.countryCode = "KH"
-        merchantPresentedMode.merchantName = "Kuntheas Shop"
-        merchantPresentedMode.merchantCity = "Banteay Meanchey"
+        merchantPresentedMode.merchantName = "Merchant Shop"
+        merchantPresentedMode.merchantCity = "Phnom Penh"
         merchantPresentedMode.additionalDataFieldTemplate = additionalDataField
 
         assertEquals("UnionPay", merchantAccountInformation.paymentNetwork())
         assertEquals(
-            "00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.0053038406225010812345678020901244444463042ACB",
+            "00020101021252044131153137210116372101160123456789ABCDE6010Phnom Penh5913Merchant Shop5802KH540510.005303840622501081234567802090124444446304A0BA",
             merchantPresentedMode.encode()
         )
     }

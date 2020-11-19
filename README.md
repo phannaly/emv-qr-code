@@ -4,7 +4,6 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.phannaly/emv-qr-code/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.phannaly/emv-qr-code)
 
 
-
 EMV QR Code library for encode and decode both Merchant Presented Mode and Consumer Presented Mode
 
 ## Usage
@@ -16,13 +15,13 @@ Maven
 <dependency>
     <groupId>com.github.phannaly</groupId>
     <artifactId>emv-qr-code</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
 </dependency>
 ```
 
 Gradle
 ```kotlin
-implementation 'com.github.phannaly:emv-qr-code:0.0.4'
+implementation 'com.github.phannaly:emv-qr-code:0.0.5'
 ```
 
 ## Features
@@ -36,7 +35,7 @@ implementation 'com.github.phannaly:emv-qr-code:0.0.4'
 ### Merchant Presented Mode decode
 ```kotlin
  val merchantPresentedMode = MerchantPresentedDecoder.decode(
-     "00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.005303840621201081234567863041FF2"
+    "00020101021252044131153137210116372101160123456789ABCDE6010Phnom Penh5913Merchant Shop5802KH540510.005303840622501081234567802090124444446304A0BA"
  )
 
 merchantPresentedMode.isDynamic // true
@@ -45,12 +44,13 @@ merchantPresentedMode.pointOfInitiationMethod // "12"
 merchantPresentedMode.merchantAccountInformation // "37210116372101160123456789ABCDE"
 merchantPresentedMode.merchantCategoryCode // "4131"
 merchantPresentedMode.transactionCurrency // "840"
+merchantPresentedMode.currency // "USD"
 merchantPresentedMode.transactionAmount // "10.00"
 merchantPresentedMode.countryCode // "KH"
-merchantPresentedMode.merchantName // "Kuntheas Shop"
-merchantPresentedMode.merchantCity // "Banteay Meanchey"
-merchantPresentedMode.additionalDataFieldTemplate // "010812345678"
-merchantPresentedMode.crc // "1FF2"
+merchantPresentedMode.merchantName // "Merchant Shop"
+merchantPresentedMode.merchantCity // "Phnom Penh"
+merchantPresentedMode.additionalDataFieldTemplate // "0108123456780209012444444"
+merchantPresentedMode.crc // "A0BA"
 ```
 
 ### Merchant Presented Mode encode
@@ -67,17 +67,18 @@ additionalDataField.billNumber = "12345678"
 additionalDataField.mobileNumber = "012444444"
 
 merchantPresentedMode.merchantAccountInformation = merchantAccountInformation
+merchantPresentedMode.additionalDataField = additionalDataField
 merchantPresentedMode.pointOfInitiationMethod = "12"
 merchantPresentedMode.payloadFormatIndicator = "01"
 merchantPresentedMode.merchantCategoryCode = "4131"
 merchantPresentedMode.transactionCurrency = "840"
 merchantPresentedMode.transactionAmount = "10.00"
 merchantPresentedMode.countryCode = "KH"
-merchantPresentedMode.merchantName = "Kuntheas Shop"
-merchantPresentedMode.merchantCity = "Banteay Meanchey"
+merchantPresentedMode.merchantName = "Merchant Shop"
+merchantPresentedMode.merchantCity = "Phnom Penh"
 
 merchantPresentedMode.encode()
-// 00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.0053038406225010812345678020901244444463042ACB
+// 00020101021252044131153137210116372101160123456789ABCDE6010Phnom Penh5913Merchant Shop5802KH540510.005303840622501081234567802090124444446304A0BA
 
 merchantAccountInformation.paymentNetwork()
 // UnionPay
@@ -88,18 +89,18 @@ CRC has been validated by default, but you can skip it by just set second params
 
 ```kotlin
 val merchantPresentedMode = MerchantPresentedDecoder.decode(
-  "00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.005303840621201081234567863041FF2",
+  "00020101021252044131153137210116372101160123456789ABCDE6010Phnom Penh5913Merchant Shop5802KH540510.005303840622501081234567802090124444446304A0BA",
   false
 )
 ```
 Compute CRC
 ```kotlin
-CRC.calculate("00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.00530384062120108123456786304")
-// 1FF2
+CRC.calculate("00020101021252044131153137210116372101160123456789ABCDE6010Phnom Penh5913Merchant Shop5802KH540510.005303840622501081234567802090124444446304")
+// A0BA
 ```
 Validate CRC
 ```kotlin
-CRC.validate("00020101021252044131153137210116372101160123456789ABCDE6016Banteay Meanchey5913Kuntheas Shop5802KH540510.005303840621201081234567863041FF2")
+CRC.validate("00020101021252044131153137210116372101160123456789ABCDE6010Phnom Penh5913Merchant Shop5802KH540510.005303840622501081234567802090124444446304A0BA")
 // true
 ```
 

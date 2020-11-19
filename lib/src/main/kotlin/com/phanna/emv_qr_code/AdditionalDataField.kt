@@ -10,36 +10,32 @@ class AdditionalDataField {
     var referenceLabel: String = ""
     var customerLabel: String = ""
     var terminalLabel: String = ""
-    var purposeOfTransaction: String = ""
-    var additionalConsumerDataRequest: String = ""
+    var transactionPurpose: String = ""
 
     override fun toString(): String {
-        if (billNumber.isNotEmpty()) {
+        if (validDataField(billNumber)) {
             dataFieldTemplate["01"] = billNumber
         }
-        if (mobileNumber.isNotEmpty()) {
+        if (validDataField(mobileNumber)) {
             dataFieldTemplate["02"] = mobileNumber
         }
-        if (storeLabel.isNotEmpty()) {
+        if (validDataField(storeLabel)) {
             dataFieldTemplate["03"] = storeLabel
         }
-        if (loyaltyNumber.isNotEmpty()) {
+        if (validDataField(loyaltyNumber)) {
             dataFieldTemplate["04"] = loyaltyNumber
         }
-        if (referenceLabel.isNotEmpty()) {
+        if (validDataField(referenceLabel)) {
             dataFieldTemplate["05"] = referenceLabel
         }
-        if (customerLabel.isNotEmpty()) {
+        if (validDataField(customerLabel)) {
             dataFieldTemplate["06"] = customerLabel
         }
-        if (terminalLabel.isNotEmpty()) {
+        if (validDataField(terminalLabel)) {
             dataFieldTemplate["07"] = terminalLabel
         }
-        if (purposeOfTransaction.isNotEmpty()) {
-            dataFieldTemplate["08"] = purposeOfTransaction
-        }
-        if (additionalConsumerDataRequest.isNotEmpty()) {
-            dataFieldTemplate["09"] = additionalConsumerDataRequest
+        if (validDataField(transactionPurpose)) {
+            dataFieldTemplate["08"] = transactionPurpose
         }
 
         var payload = ""
@@ -51,5 +47,9 @@ class AdditionalDataField {
         }
 
         return payload
+    }
+
+    private fun validDataField(field: String): Boolean {
+        return field.isNotEmpty() && field.length <= 25
     }
 }
